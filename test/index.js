@@ -34,7 +34,7 @@ test('offer fails when no offering stated', function(t) {
   process.chdir(__dirname);
   return run('../cmd.js', ['offer', '--driver=http']).catch(function(errors) {
     console.log(errors);
-    t.equal(errors, 'offering not given');
+    t.deepEqual(errors, ['offering not given']);
   });
 });
 
@@ -54,7 +54,7 @@ function run(commandLine, args, expectedLines) {
     });
 
     cmd.stderr.on('data', function (data) {
-      errors.push(data);
+      errors.push(data.toString().trim());
     });
 
     cmd.on('close', function () {
