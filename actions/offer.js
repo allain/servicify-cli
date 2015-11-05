@@ -1,8 +1,9 @@
 var npm = require('npm');
 
-var servicify = require('servicify');
+var Servicify = require('servicify');
 
 module.exports = function (argv) {
+  var servicify = Servicify(argv);
   var serverHost = argv.host || '127.0.0.1';
   var serverPort = argv.port || 2020;
 
@@ -13,7 +14,7 @@ module.exports = function (argv) {
   }
 
   servicify.offer(targetName).then(function (offering) {
-    console.log('offering local', offering.name + '@' + offering.version, 'through', offering.server.host + ':' + offering.server.port);
+    console.log('offering local', offering.name + '@' + offering.version, 'through', offering.host + ':' + offering.port);
     registerForCleanup(offering);
   }, function (err) {
     if (err.code !== 'MODULE_NOT_FOUND') throw err;
@@ -25,6 +26,7 @@ module.exports = function (argv) {
         process.chdir(npm.config.get('prefix'));
 
         return servicify.offer(targetName).then(function (offering) {
+
           console.log('offering global', offering.name + '@' + offering.version, 'through', offering.server.host + ':' + offering.server.port);
           registerForCleanup(offering);
           resolve();
@@ -45,7 +47,7 @@ module.exports = function (argv) {
   });
 
   function registerForCleanup(offering) {
-    process.stdin.resume();//so the program will not close instantly
+    process.stdin.resume(); // so the program will not close instantly
 
     function exitHandler(options, err) {
       if (!offering) return;

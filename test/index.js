@@ -24,7 +24,7 @@ test('displays usage when --help given', function (t) {
 
 test('supports listening when given custom driver', function(t) {
   process.chdir(__dirname);
-  return run('../cmd.js', ['listen', '--driver servicify-pigato']).then(function(lines) {
+  return run('../cmd.js', ['listen', '--driver=http', '--host=0.0.0.0']).then(function(lines) {
     t.equal(lines[0], 'servicify server listening at 0.0.0.0:2020', 'line as expected');
   });
 });

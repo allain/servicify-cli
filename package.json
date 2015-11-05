@@ -25,14 +25,13 @@
   },
   "homepage": "https://github.com/allain/servicify-cli#readme",
   "dependencies": {
-    "servicify": "git@github.com:allain/servicify.git#gut",
     "minimist": "1.2.0",
-    "npm": "3.3.4"
+    "npm": "3.3.4",
+    "servicify": "^1.0.2"
   },
   "devDependencies": {
     "blue-tape": "0.1.10",
     "native-promise-only": "^0.8.1",
-    "promise-identity": "1.1.1",
-    "servicify-pigato": "git@github.com:allain/servicify-pigato.git#master"
+    "promise-identity": "1.1.1"
   }
 }

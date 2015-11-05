@@ -6,6 +6,9 @@ if (argv.version) {
   return console.log(require('../package.json').version);
 }
 
+if (argv.driver && !argv.driver.match(/^servicify-/))
+  argv.driver = 'servicify-' + argv.driver;
+
 var actions = {
   listen: require('./actions/listen'),
   offer: require('./actions/offer'),
@@ -14,8 +17,7 @@ var actions = {
 
 var actionName = argv._[0];
 var action = actions[actionName];
-if (!action || argv.h || argv.help) {
+if (!action || argv.h || argv.help)
   action = actions['usage'];
-}
 
 action(argv);
