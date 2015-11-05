@@ -1,5 +1,9 @@
 # servicify-cli
 
+[![Build Status](https://travis-ci.org/allain/servicify-cli.svg)](https://travis-ci.org/allain/servicify-cli)
+[![npm](https://img.shields.io/npm/v/servicify-cli.svg)]()
+[![npm](https://img.shields.io/npm/l/servicify-cli.svg)]()
+
 Servicify cli tool.
 
 ## Installation
