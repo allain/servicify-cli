@@ -33,7 +33,6 @@ test('supports listening when given custom driver', function(t) {
 test('offer fails when no offering stated', function(t) {
   process.chdir(__dirname);
   return run('../cmd.js', ['offer', '--driver=http']).catch(function(errors) {
-    console.log(errors);
     t.deepEqual(errors, ['offering not given']);
   });
 });
