@@ -31,7 +31,7 @@ test('supports listening when given custom driver', function(t) {
 
 test('offer fails when no offering stated', function(t) {
   process.chdir(__dirname);
-  return run('../cmd.js', ['offer', '--driver servicify-pigato']).catch(function(error) {
+  return run('../cmd.js', ['offer', '--driver=http']).catch(function(error) {
     t.equal(error, 'offering not given');
   });
 });
