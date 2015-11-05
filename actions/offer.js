@@ -14,7 +14,6 @@ module.exports = function (argv) {
   }
 
   servicify.offer(targetName).then(function (offering) {
-    console.log(offering);
     console.log('offering local', offering.name + '@' + offering.version, 'through', offering.host + ':' + offering.port);
     registerForCleanup(offering);
   }, function (err) {
@@ -27,8 +26,7 @@ module.exports = function (argv) {
         process.chdir(npm.config.get('prefix'));
 
         return servicify.offer(targetName).then(function (offering) {
-
-          console.log('offering global', offering.name + '@' + offering.version, 'through', offering.server.host + ':' + offering.server.port);
+          console.log('offering global', offering.name + '@' + offering.version, 'through', offering.host + ':' + offering.port);
           registerForCleanup(offering);
           resolve();
         }, reject);
