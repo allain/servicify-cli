@@ -29,10 +29,12 @@ test('supports listening when given custom driver', function(t) {
   });
 });
 
+// Skip until we can circle back and determine why the error is empty
 test('offer fails when no offering stated', function(t) {
   process.chdir(__dirname);
-  return run('../cmd.js', ['offer', '--driver=http']).catch(function(error) {
-    t.equal(error, 'offering not given');
+  return run('../cmd.js', ['offer', '--driver=http']).catch(function(errors) {
+    console.log(errors);
+    t.equal(errors, 'offering not given');
   });
 });
 
@@ -41,6 +43,7 @@ function run(commandLine, args, expectedLines) {
 
   return new Promise(function(resolve, reject) {
     var lines = [];
+    var errors = [];
     var cmd = spawn(commandLine, args);
 
     cmd.stdout.on('data', function (data) {
@@ -51,11 +54,15 @@ function run(commandLine, args, expectedLines) {
     });
 
     cmd.stderr.on('data', function (data) {
-      reject(data.toString().trim());
+      errors.push(data);
     });
 
     cmd.on('close', function () {
-      resolve(lines);
+      if (errors.length) {
+        reject(errors);
+      } else {
+        resolve(lines);
+      }
     });
   });
 }
