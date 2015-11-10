@@ -27,7 +27,7 @@
   "dependencies": {
     "minimist": "1.2.0",
     "npm": "3.3.4",
-    "servicify": "~1.0.3",
+    "servicify": "~1.1.0",
     "servicify-http": "^1.0.1"
   },
   "devDependencies": {
